@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class AvaliadorTest extends TestCase
 {
-    private $leiloeiro;
+    private Avaliador $leiloeiro;
 
     protected function setUp(): void
     {
@@ -64,6 +64,24 @@ class AvaliadorTest extends TestCase
         static ::assertEquals(2500, $maiores[0]->getValor());
         static ::assertEquals(2000, $maiores[1]->getValor());
         static ::assertEquals(1700, $maiores[2]->getValor());
+    }
+
+    public function testLeilaoVazioNaoPodeSalvarAvaliado()
+    {
+        $this->expectException(\DomainException::class);
+        $leiao = new Leilao('Fusca Azul');
+        $this->leiloeiro->avalia($leiao);
+    }
+
+    public function testLeilaoFinalizadoNaoPodeSerFinalizado()
+    {
+        $this->expectException(\DomainException::class);
+        $this->expectExceptionMessage('Leilão já finalizado');
+        $leilao = new Leilao('Fiat 147 0KM');
+        $leilao->recebeLance(new Lance(new Usuario("Ang"), 2000));
+        $leilao->finaliza();
+
+        $this->leiloeiro->avalia($leilao);
     }
 
     public function leilaoEmOrdemCrescente(): array

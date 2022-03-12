@@ -14,4 +14,6 @@ Avaliador (Alura\Leilao\Tests\Service\Avaliador)
  [x] Avaliador deve buscar 3 maiores valores with data set #0
  [x] Avaliador deve buscar 3 maiores valores with data set #1
  [x] Avaliador deve buscar 3 maiores valores with data set #2
+ [x] Leilao vazio nao pode salvar avaliado
+ [x] Leilao finalizado nao pode ser finalizado
 
